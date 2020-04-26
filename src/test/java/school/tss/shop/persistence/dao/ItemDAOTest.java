@@ -1,6 +1,5 @@
 package school.tss.shop.persistence.dao;
 
-import com.sun.xml.internal.rngom.parse.host.Base;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import school.tss.shop.BaseTest;
