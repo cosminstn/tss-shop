@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import school.tss.shop.BaseTest;
 import school.tss.shop.persistence.entity.Item;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ItemDAOTest extends BaseTest {
 
 	@Autowired
