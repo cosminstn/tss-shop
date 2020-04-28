@@ -43,16 +43,16 @@ public class ItemDAO extends EntityDAO<Item> {
 	}
 
 	public int update(Item item) {
-		return jdbcTemplate.update(
-				"update items" + "set name = ?, price = ?" + "where id = ?",
-				item.getName(), item.getPrice(), item.getId());
+
+		String updateSql = "UPDATE item SET name = ?, price = ? WHERE id = ?";
+		return jdbcTemplate.update(updateSql, item.getName(), item.getPrice(), item.getId());
 	}
 
 	public Item getByName(String name) {
 		return jdbcTemplate.queryForObject("SELECT * FROM " + TABLE_NAME + " WHERE NAME = ?", new Object[]{name}, getRowMapper());
 	}
 
-	public List<Item> findAll(String name){
+	public List<Item> findAll(){
 		return jdbcTemplate.query("select * from item", getRowMapper());
 	}
 
