@@ -17,8 +17,11 @@ import java.util.Map;
 @Component
 public class CategoryDAO extends EntityDAO<Category> {
 
+	private static JdbcTemplate jb;
+
 	public CategoryDAO(JdbcTemplate jdbcTemplate, DataSource dataSource) {
 		super("CATEGORY", jdbcTemplate, dataSource);
+		jb = jdbcTemplate;
 	}
 
 	@Override
@@ -45,17 +48,35 @@ public class CategoryDAO extends EntityDAO<Category> {
 		return category;
 	}
 
-	public int update(Category category) {
-		return jdbcTemplate.update(
-				"update category" + "set name = ?" + "where id = ?",
-				category.getName(), category.getId());
+
+	public static void deleteTable() {
+
+		String updateSql = "DELETE FROM category";
+
+		String sqlAdd1 = "INSERT INTO CATEGORY(NAME) VALUES ( 'Computers' )";
+		String sqlAdd2 = "INSERT INTO CATEGORY(NAME) VALUES ( 'Smartphones' )";
+
+		jb.update(updateSql);
+		jb.update(sqlAdd1);
+		jb.update(sqlAdd2);
+
+
 	}
 
-	public Category getByCategory(String name) {
+
+	public int update(Category category) {
+
+		String updateSql = "UPDATE category SET name = ? WHERE id = ?";
+		return jdbcTemplate.update(updateSql, category.getName(), category.getId());
+
+	}
+
+	public Category getByName(String name) {
+
 		return jdbcTemplate.queryForObject("SELECT * FROM " + TABLE_NAME + " WHERE NAME = ?", new Object[]{name}, getRowMapper());
 	}
 
-	public List<Category> findAll(String name){
+	public List<Category> findAll(){
 		return jdbcTemplate.query("select * from category", getRowMapper());
 	}
 
