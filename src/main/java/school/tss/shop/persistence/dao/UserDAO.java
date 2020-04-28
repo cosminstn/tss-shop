@@ -3,11 +3,13 @@ package school.tss.shop.persistence.dao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import school.tss.shop.exceptions.InvalidIdException;
 import school.tss.shop.persistence.dao.base.EntityDAO;
 import school.tss.shop.persistence.entity.User;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("SqlResolve")
@@ -38,12 +40,26 @@ public class UserDAO extends EntityDAO<User> {
 	}
 
 	@Override
-	public User update(long id, User updateEntry) {
+	public User update(long id, User updateEntry) throws InvalidIdException {
 		return null;
+	}
+
+	public int update(User user) {
+		return jdbcTemplate.update(
+				"update user" + "set username = ?, password = ?, role = ?" + "where id = ?",
+				user.getUsername(), user.getPassword(), user.getRole(), user.getId());
 	}
 
 	public User getByUsername(String username) {
 		return jdbcTemplate.queryForObject("SELECT * FROM " + TABLE_NAME + " WHERE USERNAME = ?", new Object[]{username}, getRowMapper());
+	}
+
+	public List<User> findAll(String username){
+		return jdbcTemplate.query("select * from user", getRowMapper());
+	}
+
+	public int deleteById(long id){
+		return jdbcTemplate.update("delete from user where id=?", id);
 	}
 
 	@SuppressWarnings("ConstantConditions")

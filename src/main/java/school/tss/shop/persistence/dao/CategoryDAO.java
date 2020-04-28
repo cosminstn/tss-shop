@@ -5,11 +5,13 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import school.tss.shop.persistence.dao.base.EntityDAO;
 import school.tss.shop.persistence.entity.Category;
+import school.tss.shop.persistence.entity.User;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -41,6 +43,24 @@ public class CategoryDAO extends EntityDAO<Category> {
 		category.setName(newEntry.getName());
 
 		return category;
+	}
+
+	public int update(Category category) {
+		return jdbcTemplate.update(
+				"update category" + "set name = ?" + "where id = ?",
+				category.getName(), category.getId());
+	}
+
+	public Category getByCategory(String name) {
+		return jdbcTemplate.queryForObject("SELECT * FROM " + TABLE_NAME + " WHERE NAME = ?", new Object[]{name}, getRowMapper());
+	}
+
+	public List<Category> findAll(String name){
+		return jdbcTemplate.query("select * from category", getRowMapper());
+	}
+
+	public int deleteById(long id){
+		return jdbcTemplate.update("delete from category where id=?", id);
 	}
 
 	@Override

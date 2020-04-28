@@ -5,9 +5,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import school.tss.shop.persistence.dao.base.EntityDAO;
 import school.tss.shop.persistence.entity.Item;
+import school.tss.shop.persistence.entity.User;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -38,6 +40,24 @@ public class ItemDAO extends EntityDAO<Item> {
 	@Override
 	public Item update(long id, Item updateEntry) {
 		return null;
+	}
+
+	public int update(Item item) {
+		return jdbcTemplate.update(
+				"update items" + "set name = ?, price = ?" + "where id = ?",
+				item.getName(), item.getPrice(), item.getId());
+	}
+
+	public Item getByName(String name) {
+		return jdbcTemplate.queryForObject("SELECT * FROM " + TABLE_NAME + " WHERE NAME = ?", new Object[]{name}, getRowMapper());
+	}
+
+	public List<Item> findAll(String name){
+		return jdbcTemplate.query("select * from item", getRowMapper());
+	}
+
+	public int deleteById(long id){
+		return jdbcTemplate.update("delete from item where id=?", id);
 	}
 
 	@Override
