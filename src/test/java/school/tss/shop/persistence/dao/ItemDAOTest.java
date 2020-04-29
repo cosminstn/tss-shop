@@ -3,7 +3,6 @@ package school.tss.shop.persistence.dao;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.RowMapper;
 import school.tss.shop.BaseTest;
 import school.tss.shop.persistence.entity.Item;
 
@@ -50,48 +49,36 @@ class ItemDAOTest extends BaseTest {
 
 	@Test
 	public void updateItemNotInDB() {
-
 		Item item = new Item();
-
-
 		item.setId(7);
 		item.setName("Item1");
 		item.setPrice(5000);
 		item.setCategoryId(1);
 		item.setCurrentDiscount(0);
-
 		int result = itemDAO.update(item);
-
 		assertEquals(0, result);
-
 	}
 
 
 
 	@Test
 	public void getByName() {
-
 		assertEquals("Apple Macbook Pro", itemDAO.getByName("Apple Macbook Pro").getName());
 		assertEquals("Lenovo X1 Carbon", itemDAO.getByName("Lenovo X1 Carbon").getName());
 		assertEquals("Apple iPhone 11", itemDAO.getByName("Apple iPhone 11").getName());
-
 	}
 
 	@Test
 	public void findAll(){
-
 		List<Item> allItems = itemDAO.findAll();
 		assertEquals(3, allItems.size());
 		assertNotEquals(0, allItems.size());
-
 	}
 
 	@Test
 	public void deleteById(){
-
 		assertEquals(1, itemDAO.deleteById(2));
 		assertEquals(0, itemDAO.deleteById(13));
-
 	}
 
 

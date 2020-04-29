@@ -1,5 +1,6 @@
 package school.tss.shop.persistence.dao.base;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -35,7 +36,11 @@ public abstract class EntityDAO<T> implements IEntityDAO<T> {
 	}
 
 	public boolean exists(long id) {
-		return get(id) != null;
+		try {
+			return get(id) != null;
+		} catch (EmptyResultDataAccessException ex) {
+			return false;
+		}
 	}
 
 	@Override
