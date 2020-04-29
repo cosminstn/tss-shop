@@ -58,7 +58,7 @@ public class ShoppingCommands {
 		}
 		StringBuilder output = new StringBuilder("Cart info: \n");
 		cartService.getCartItems().forEach(pair -> {
-			output.append(String.format("%d x %s\n", pair.getValue(), pair.getKey().getName()));
+			output.append(String.format("%d x %s\n", pair.getSecond(), pair.getFirst().getName()));
 		});
 		output.append(String.format("Total value: %f", cartService.getCartTotalValue()));
 		return output.toString();
