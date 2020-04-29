@@ -61,7 +61,7 @@ class CartServiceTest extends BaseTest {
 	void getCartItems() throws Exception {
 			cartService.addProduct(1,1);
 			assertEquals(1,cartService.getCartItems().get(0).getFirst().getId());
-		//assertEquals("Random product", itemDAO.create(item).getName());
+
 
 	}
 
