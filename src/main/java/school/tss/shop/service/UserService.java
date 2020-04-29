@@ -17,6 +17,9 @@ public class UserService {
 	@Autowired
 	private UserDAO userDAO;
 
+	@Autowired
+	private CartService cartService;
+
 	private final AtomicReference<User> loggedUser = new AtomicReference<>();
 
 	public User login(String username, String password) throws InvalidCredentialsException, BadCredentialsException {
@@ -41,6 +44,8 @@ public class UserService {
 			throw new AuthenticationException("UNAUTHENTICATED!");
 		}
 		loggedUser.set(null);
+		// destroy existing cart
+		cartService.clearCart();
 	}
 
 	public User registerCustomer(String username, String password, String passwordConfirmation) throws UserRegistrationException {

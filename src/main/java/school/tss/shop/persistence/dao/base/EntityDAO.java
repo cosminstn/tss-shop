@@ -34,6 +34,10 @@ public abstract class EntityDAO<T> implements IEntityDAO<T> {
 		return jdbcTemplate.queryForObject("SELECT * FROM " + TABLE_NAME + " WHERE ID = ?", new Object[]{id}, getRowMapper());
 	}
 
+	public boolean exists(long id) {
+		return get(id) != null;
+	}
+
 	@Override
 	public void delete(long id) throws InvalidIdException {
 		int result = jdbcTemplate.update("DELETE FROM " + TABLE_NAME + " WHERE ID = ?", id);
