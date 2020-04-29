@@ -17,7 +17,7 @@ class UserDAOTest extends BaseTest {
 	private UserDAO userDAO;
 
 	@Test
-	void create() {
+	void createUserTest() {
 		User user = new User();
 		user.setUsername("usertry1");
 		user.setPassword("jfdoisajfidosa");
@@ -74,7 +74,7 @@ class UserDAOTest extends BaseTest {
 	}
 
 	@Test
-	public void findAllItemsTest() {
+	public void findAllUsersTest() {
 
 		List<User> allUsers = userDAO.findAll();
 		assertEquals(4, allUsers.size());
