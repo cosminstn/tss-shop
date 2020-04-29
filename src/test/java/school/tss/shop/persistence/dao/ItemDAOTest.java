@@ -19,7 +19,7 @@ class ItemDAOTest extends BaseTest {
 
 	@Test
 	@Disabled
-	void create() {
+	void createItemTest() {
 		Item item = new Item();
 		item.setCategoryId(1);
 		item.setName("Random product");
@@ -32,7 +32,7 @@ class ItemDAOTest extends BaseTest {
 
 
 	@Test
-	public void updateItemInDB() {
+	public void updateItemInDBTest() {
 
 		Item item = new Item();
 
@@ -49,7 +49,7 @@ class ItemDAOTest extends BaseTest {
 	}
 
 	@Test
-	public void updateItemNotInDB() {
+	public void updateItemNotInDBTest() {
 
 		Item item = new Item();
 
@@ -69,7 +69,7 @@ class ItemDAOTest extends BaseTest {
 
 
 	@Test
-	public void getByName() {
+	public void getItemByNameTest() {
 
 		assertEquals("Apple Macbook Pro", itemDAO.getByName("Apple Macbook Pro").getName());
 		assertEquals("Lenovo X1 Carbon", itemDAO.getByName("Lenovo X1 Carbon").getName());
@@ -78,7 +78,7 @@ class ItemDAOTest extends BaseTest {
 	}
 
 	@Test
-	public void findAll(){
+	public void findAllItemsTest(){
 
 		List<Item> allItems = itemDAO.findAll();
 		assertEquals(3, allItems.size());
@@ -87,7 +87,7 @@ class ItemDAOTest extends BaseTest {
 	}
 
 	@Test
-	public void deleteById(){
+	public void deleteItemByIdTest(){
 
 		assertEquals(1, itemDAO.deleteById(2));
 		assertEquals(0, itemDAO.deleteById(13));

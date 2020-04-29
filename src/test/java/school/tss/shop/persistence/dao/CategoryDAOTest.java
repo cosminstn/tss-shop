@@ -16,7 +16,7 @@ class CategoryDAOTest extends BaseTest {
     private CategoryDAO categoryDAO;
 
     @Test
-    public void create() {
+    public void createCategory() {
 
         Category category = new Category();
 
@@ -56,7 +56,7 @@ class CategoryDAOTest extends BaseTest {
     }
 
     @Test
-    public void getByCategory() {
+    public void getCategoryByName() {
 
         assertEquals("Computers", categoryDAO.getByName("Computers").getName());
         assertEquals("Smartphones", categoryDAO.getByName("Smartphones").getName());
@@ -65,25 +65,25 @@ class CategoryDAOTest extends BaseTest {
     }
 
     @AfterEach
-    public void afterTests() {
+    public void afterTestsCategory() {
 
         System.out.println("Test executed.");
 
     }
 
     @Test
-    public void findAll(){
+    public void findAllCategories(){
 
 
         List<Category> allCategories = categoryDAO.findAll();
         assertEquals(3, allCategories.size());
         assertNotEquals(0, allCategories.size());
-        //
+
 
     }
 
     @Test
-    public void deleteById(){
+    public void deleteCategoryById(){
 
         assertEquals(1, categoryDAO.deleteById(1));
         assertEquals(0, categoryDAO.deleteById(8));
