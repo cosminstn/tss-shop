@@ -40,21 +40,25 @@ public class UserDAO extends EntityDAO<User> {
 	}
 
 	@Override
-	public User update(long id, User updateEntry) throws InvalidIdException {
+	public User update(long id, User updateEntry) throws InvalidIdException
+	{
 		return null;
 	}
 
 	public int update(User user) {
-		return jdbcTemplate.update(
+		/*return jdbcTemplate.update(
 				"update user" + "set username = ?, password = ?, role = ?" + "where id = ?",
-				user.getUsername(), user.getPassword(), user.getRole(), user.getId());
+				user.getUsername(), user.getPassword(), user.getRole(), user.getId());*/
+		String updateSql = "UPDATE user SET username = ?, password = ?, role = ? WHERE id = ?";
+		return jdbcTemplate.update(updateSql,user.getUsername(),user.getPassword(),user.getRole());
+
 	}
 
 	public User getByUsername(String username) {
 		return jdbcTemplate.queryForObject("SELECT * FROM " + TABLE_NAME + " WHERE USERNAME = ?", new Object[]{username}, getRowMapper());
 	}
 
-	public List<User> findAll(String username){
+	public List<User> findAll(){
 		return jdbcTemplate.query("select * from user", getRowMapper());
 	}
 
