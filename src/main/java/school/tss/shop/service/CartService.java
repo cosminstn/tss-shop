@@ -1,7 +1,7 @@
 package school.tss.shop.service;
 
-import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import school.tss.shop.exceptions.cart.InvalidProductIdException;
 import school.tss.shop.exceptions.cart.InvalidQtyException;
@@ -55,7 +55,7 @@ public class CartService {
 		}
 		List<Pair<Item, Integer>> cartInfo = new ArrayList<>();
 		cart.get().getProductIdQuantityMap().forEach((itemId, qty) -> {
-			cartInfo.add(new Pair<>(itemDAO.get(itemId), qty));
+			cartInfo.add(Pair.of(itemDAO.get(itemId), qty));
 		});
 		return cartInfo;
 	}
