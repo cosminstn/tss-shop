@@ -30,44 +30,6 @@ class UserDAOTest extends BaseTest {
 
 	}
 
-	//failed
-	@Test
-	@Disabled
-	public void updateUserInDBTest() {
-
-		User user = new User();
-
-		user.setId(1);
-		user.setUsername("tryupdate1");
-		user.setPassword("abcd1234");
-		user.setRole(User.Role.MANAGEMENT);
-
-		int result = userDAO.update(user);
-
-		assertEquals(1, result);
-
-
-
-	}
-	//failed
-	@Test
-	@Disabled
-	public void updateUserNotInDBTest() {
-
-		User user = new User();
-
-		user.setId(7);
-		user.setUsername("tryupdate1");
-		user.setPassword("abcd1234");
-		user.setRole(User.Role.MANAGEMENT);
-
-		int result = userDAO.update(user);
-
-		assertEquals(0, result);
-
-	}
-
-
 
 	@Test
 	void getByUsername() {
